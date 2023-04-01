@@ -1,0 +1,200 @@
+% !TeX encoding = UTF-8 Unicode
+% !TeX root = ./main.tex
+
+\documentclass[%
+    english,			% language option (en_US)
+    oneside,            % onesided output
+    fontsize=12pt,      % font size
+    parskip=half,       % half line space after paragraph
+    headheight=12pt,    % height of headline
+    headsepline,        % rule after headline
+    footheight=16pt,    % height of footline
+    DIV=calc,           % calculate type area
+    BCOR=8mm,           % tie correction
+    headinclude=false,  % don't include headline in type area
+    footinclude=false,  % don't include footline in type area
+    listof=totoc,       % list lists (of figures etc.) in toc
+    toc=bibliography,   % list literature in toc
+]{scrbook}
+
+% include custom variables
+\input{variables}
+
+% input and font encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% fonts
+\usepackage{amssymb}
+\usepackage{fourier}
+
+% language package (german for abstract)
+\usepackage[main=english, ngerman]{babel}
+
+% german quotes for abstract
+\usepackage{csquotes}
+
+% literature
+\usepackage[%
+    backend=biber,
+    style=ieee,
+    alldates=iso,
+]{biblatex}
+\addbibresource{bibliographie.bib}
+
+% margins and spacings
+\usepackage[margin=2.5cm,foot=1cm]{geometry}
+\usepackage[onehalfspacing]{setspace}
+
+% graphics
+\usepackage{graphicx}
+
+% hyperlinks
+\usepackage{xcolor}
+\usepackage[%
+    colorlinks=false
+]{hyperref}
+
+\hypersetup{%
+    pdftitle={\myTitle},
+    pdfsubject={\myType},
+    pdfauthor={\myAuthor},
+    pdfcreator={pdflatex},
+    pdflang=en,
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black},
+    pdfpagemode=UseOutlines,
+    pdfdisplaydoctitle=true,
+    linktocpage=true,
+    bookmarksnumbered=true
+}
+
+% footnotes
+\usepackage[perpage, hang, multiple, stable]{footmisc}
+
+% better microtyping
+\usepackage[activate, tracking=true, kerning=true, spacing=true]{microtype}
+
+% patch ieee.bbx to omit date at online entries when date is not defined
+\usepackage{xpatch}
+\xpatchbibdriver{online}
+{\printtext[parens]{\usebibmacro{date}}}
+{\iffieldundef{date}
+	{}
+	{\printtext[parens]{\usebibmacro{date}}}}
+{}
+{\typeout{There was an error patching biblatex-ieee (specifically, ieee.bbx's @online driver)}}
+
+% glossaries and acronyms
+\usepackage[toc, acronym, nonumberlist]{glossaries}
+\usepackage{xltabular}
+\usepackage{environ}
+
+
+% place floats only AFTER they are defined
+\usepackage{flafter}
+
+% better tables
+\usepackage{tabularray}
+\UseTblrLibrary{diagbox}
+\UseTblrLibrary{booktabs}
+
+% to use FloatBarrier
+\usepackage{placeins}
+
+% for math stuff
+\usepackage{mathtools}
+
+
+% create new glossary style with tabularx
+\NewEnviron{acrtable}{%
+	\begin{xltabular}{\linewidth}{lX}%
+		\BODY
+	\end{xltabular}
+}
+
+\newglossarystyle{longx}
+{%
+	\renewenvironment{theglossary}
+	{%
+		\acrtable
+	}{%
+		\endacrtable
+	}
+	\renewcommand*{\glossaryheader}{}%
+	% Don't do anything between letter groups
+	\renewcommand*{\glsgroupheading}[1]{}%
+	\renewcommand*{\glsgroupskip}{}%
+	% Set display for each the acronym entry
+	\renewcommand{\glossentry}[2]{%
+		\glstarget{##1}{\textbf{\glsentryshort{##1}}}% short form
+		&
+		\glsentrylong{##1}% long form
+		\\% end of row
+	}%
+}
+
+
+% for cross references
+\usepackage{prettyref}
+\usepackage{titleref}
+%%% for sections %%%
+\newrefformat{sec}{see section~\ref{#1} \glqq{}\nameref{#1}\grqq{} on page~\pageref{#1}}
+%%% for figures %%%
+\newrefformat{fig}{see figure~\ref{#1} \glqq{}\nameref{#1}\grqq{} on page~\pageref{#1}}
+%%% for tables %%%
+\newrefformat{tab}{see table~\ref{#1} \glqq{}\nameref{#1}\grqq{} on page~\pageref{#1}}
+%%% for listings %%%
+\newrefformat{lst}{see listing~\ref{#1} \glqq{}\nameref{#1}\grqq{} on page~\pageref{#1}}
+%%% for appendix %%%
+\newrefformat{app}{see appendix~\ref{#1} \glqq{}\nameref{#1}\grqq{} on page~\pageref{#1}}
+%%% for glossaries %%%
+\newrefformat{glo}{see glossary~\ref{#1} \glqq{}\nameref{#1}\grqq{}}
+
+% number and unit formatting
+\usepackage{siunitx}
+\sisetup{%
+	per-mode=fraction,
+	locale = US
+}
+
+% better breaking of URLs
+\usepackage{url}
+\def\UrlBigBreaks{\do\/\do-\do:\do\_}
+
+% spacing in tables
+\setlength{\tabcolsep}{10pt}
+\renewcommand{\arraystretch}{1.5}
+
+% toc depth
+\setcounter{tocdepth}{2}
+
+% prevent line break after first line of a new paragraph
+\clubpenalty = 10000
+% prevent line break before last sentence of a paragraph
+\widowpenalty = 10000
+\displaywidowpenalty=10000
+
+% continue numbering of frontmatter in backmatter
+\makeatletter
+\newcounter{savedfrontmatterpage}
+\renewcommand{\mainmatter}{%
+  \cleardoublepage
+  \setcounter{savedfrontmatterpage}{\value{page}}%
+  \@mainmattertrue
+  \pagenumbering{arabic}%
+}
+
+\renewcommand\backmatter{%
+  \if@openright
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+  \@mainmatterfalse
+  \pagenumbering{roman}%
+  \setcounter{page}{\value{savedfrontmatterpage}}%
+}
+\makeatother

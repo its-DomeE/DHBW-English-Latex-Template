@@ -1,0 +1,40 @@
+% !TeX encoding = UTF-8 Unicode
+% !TeX root = ./../main.tex
+
+\begin{titlepage}
+\begin{tblr}{
+    colspec={X[l]X[r]},
+    width=\linewidth
+}
+{\raisebox{-.5\height}{\includegraphics[height=2.5cm]{04-images/company.png}}} & {\raisebox{-.5\height}{\includegraphics[height=2.5cm]{04-images/dhbw.png}}} \\
+\end{tblr}
+\enlargethispage{20mm}
+\begin{center}
+    \vspace*{10mm}
+    \begin{onehalfspace}
+        \Huge \myTitle \\
+    \end{onehalfspace}
+    \vspace*{15mm}{\LARGE\textbf{\myType}}\\
+	\vspace*{15mm}{\Large in} \\
+	\vspace*{3mm}{\LARGE \myMajor}\\
+    \vspace*{15mm}{\Large by}\\
+    \vspace*{3mm}{\LARGE\textbf{\myAuthor}}\\
+    \vspace*{15mm}{at the Baden-Württemberg Cooperative State University \myDHBW}\\
+    \vspace*{15mm}{\large\myDate}\\
+\end{center}
+	\vfill
+	\begin{center}
+	\begin{spacing}{1.2}
+    \begin{tblr}{%
+        colspec={X[r]|X[l]},
+        width=\linewidth
+    }
+    \textbf{Working Period} & \myWorkingPeriod \\
+	\textbf{Matriculation Number, Course} & \myMatriculationNumber, \myCourse \\
+	\textbf{Company} & {\myCompany\\\myCompanyCity} \\
+	\textbf{Company Supervisor} & \myCompanySupervisor \\
+    \textbf{University Supervisor} & \myUniversitySupervisor \\
+    \end{tblr}
+	\end{spacing}
+	\end{center}
+\end{titlepage}

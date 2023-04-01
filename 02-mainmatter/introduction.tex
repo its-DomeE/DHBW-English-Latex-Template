@@ -1,0 +1,49 @@
+% !TeX encoding = UTF-8 Unicode
+% !TeX root = ./../main.tex
+% !TeX spellcheck = en_US
+
+\chapter{Introduction}
+\section{How to use this template}
+
+This is citation\cite{uml}. This is another citation\cite{Gamma}.
+
+This is a footnote\footnote{Hey I'm a footnote!}
+
+This is an acronym \gls{DHBW}.
+
+This is a glossary \gls{rubberducking}.
+
+Make awesome tables:
+\begin{table}[h]
+	\centering
+	\begin{tblr} {
+			colspec={ l X[c] X[c] X[c] },
+			hlines,
+			hline{6} = {2}{-}{},
+			vlines,
+			vline{1- 5} = {abovepos = 1, belowpos = 1},
+			cell{1}{1}={c},
+		}
+		\multirow[c]{2}{*}{\textit{Criteria}} & \multicolumn{3}{c}{\textit{Programming Languages}} \\
+		& \textbf{C} & \textbf{C++} & \textbf{Rust} \\
+		Modularity & 2 & 4 & 4 \\
+		Performance & 5 & 4 & 3 \\
+		Security & 1 & 2 & 4 \\
+		\textbf{Result} & 8 & 10 & 11 \\
+	\end{tblr}
+	\caption{Programming language decision matrix}
+	\label{tab:programmingLanguageDecisionMatrix}
+\end{table}
+
+Cross reference your table (\prettyref{tab:programmingLanguageDecisionMatrix}).
+
+
+Include graphics:
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=2.5cm]{04-images/dhbw.png}
+	\caption{DHBW Logo}
+	\label{fig:dhbwLogo}
+\end{figure}
+
+Cross reference a figure (\prettyref{fig:dhbwLogo}).

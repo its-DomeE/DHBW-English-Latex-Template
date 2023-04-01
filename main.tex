@@ -1,0 +1,51 @@
+% !TeX encoding = UTF-8 Unicode
+
+% load preamble with documentclass and packages
+\input{preamble}
+
+% make glossaries and acronyms
+\makenoidxglossaries
+\input{01-frontmatter/acronyms}
+\input{03-backmatter/glossaries.tex}
+
+\begin{document}
+
+	% change chapter spacing
+	\RedeclareSectionCommand[beforeskip=20pt]{chapter}
+
+	\frontmatter
+	% ----------------------------------------------------------------------------
+	% titlepage:
+	\input{01-frontmatter/titlepage}
+	% ----------------------------------------------------------------------------
+	% Erklärung:
+	\input{01-frontmatter/declaration}
+	% ----------------------------------------------------------------------------
+	% abstract:
+	\input{01-frontmatter/abstract}
+	\input{01-frontmatter/kurzfassung}
+	% ----------------------------------------------------------------------------
+	% table of contents:
+	\tableofcontents
+	% ----------------------------------------------------------------------------
+	% acronyms:
+	\printnoidxglossary[type=\acronymtype, style=longx, title=Acronyms]
+	\clearpage
+	% ----------------------------------------------------------------------------
+	% list of *:
+	\listoffigures
+	\listoftables
+	
+	\mainmatter
+	% ----------------------------------------------------------------------------
+	% main part:
+	\input{02-mainmatter/introduction}
+
+	\backmatter
+	% ----------------------------------------------------------------------------
+	% literature:
+	\printbibliography
+	% ----------------------------------------------------------------------------
+	% glossaries:
+	\printnoidxglossary[style=altlist, title=Glossarries]
+\end{document}
