@@ -1,4 +1,7 @@
 # DHBW-Latex-Template <!-- omit in toc -->
+
+<img src="https://user-images.githubusercontent.com/57755160/229297351-211facd5-dfa2-413e-88ff-2fe0858c5d24.jpg" width="400" />
+
 ## Table of Contents <!-- omit in toc -->
 - [Introduction](#introduction)
 - [How to Use](#how-to-use)
