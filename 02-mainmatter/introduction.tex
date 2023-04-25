@@ -24,7 +24,7 @@ Make awesome tables:
 			vline{1- 5} = {abovepos = 1, belowpos = 1},
 			cell{1}{1}={c},
 		}
-		\multirow[c]{2}{*}{\textit{Criteria}} & \multicolumn{3}{c}{\textit{Programming Languages}} \\
+		\SetCell[r=2]{c} \textit{Criteria} & \SetCell[c=3]{c} \textit{Programming Languages} \\
 		& \textbf{C} & \textbf{C++} & \textbf{Rust} \\
 		Modularity & 2 & 4 & 4 \\
 		Performance & 5 & 4 & 3 \\
