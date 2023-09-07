@@ -1,5 +1,5 @@
 @default_files = ("main.tex");
-$out_dir = "output";
+$aux_dir = "build";
 
 # Use pdflatex
 $pdf_mode = 1;
@@ -14,26 +14,4 @@ $recorder = 1;
 $bibtex_use = 2;
 
 # Generated extensions to be cleaned
-@generated_exts = qw(aux bcf blg fls log out toc run.xml synctex.gz);
-
-$pdflatex = 'internal mypdflatex %D %O %S';
-
-sub mypdflatex {
-	use File::Copy qw(copy);
-
-	my $file = shift;
-	my ($base_name, $path) = fileparse( $file );
-	my $synctexfile = $path . ($base_name =~ s/\.[^.]+$//r) . ".synctex.gz";
-	my $logfile = $path . ($base_name =~ s/\.[^.]+$//r) . ".log";
-	my $new_dir = $path . "../";
-	my @args = @_;
-	unshift(@args, "-synctex=1");
-
-	$return = system 'pdflatex', @args;
-
-	copy $file, $new_dir;
-	copy $synctexfile, $new_dir;
-	copy $logfile, $new_dir;
-
-	return $return;
-}
+$clean_ext="lof lot run.xml tdo"
